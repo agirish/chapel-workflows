@@ -1,0 +1,19 @@
+# This workflow can be incorporated into other workflows and reused to compile Chapel code against a specified Chapel version
+# utilizing pre-built Chapel containers.
+
+name: Chapel Reusable Workflow
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: chapel/chapel:2.3.0
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile and Run Chapel Code
+        run: |
+          chpl ${{ inputs.file_name }}
+          ./${{ inputs.file_name | basename '.chpl' }}
