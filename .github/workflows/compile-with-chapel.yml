@@ -16,4 +16,6 @@ jobs:
       - name: Compile and Run Chapel Code
         run: |
           chpl ${{ inputs.file_name }}
-          ./${{ basename "${{ inputs.file_name }}" .chpl }}
+          filename="${{ inputs.file_name }}"
+          filename="${filename%.chpl}"
+          ./$filename
